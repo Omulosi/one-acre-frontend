@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import FundPage from './FundPage';
+import DetailPage from './DetailPage';
 
 const Farm = ({ title, farm }) => {
-  const [state, setState] = useState({showModal: false});
+  const [detailModal, setDetailModal] = useState({showDetailModal: false});
+  const [fundModal, setFundModal] = useState({showFundModal: false});
 
-  const toggleModal = () => setState({showModal: !state.showModal});
+  const toggleDetailModal = () => {
+    setDetailModal({showDetailModal: !detailModal.showDetailModal});
+  }
+
+  const toggleFundModal = () => {
+    setFundModal({showFundModal: !fundModal.showFundModal});
+  }
 
   return (
         <div className="column is-5 card farm">
@@ -29,46 +38,34 @@ const Farm = ({ title, farm }) => {
               <dd>{ farm.margin }</dd>
             </dl>
             <button className="button is-info is-small is-outlined" 
-              onClick={toggleModal} style={{marginRight: '0.5em'}}>
+              onClick={toggleDetailModal} style={{marginRight: '0.5em'}}>
               Details
             </button>
-            <button className="button is-success is-small" 
-              onClick={toggleModal}>
+            <button className="button is-info is-small" 
+              onClick={toggleFundModal}>
               Fund
             </button>
           </div>
-    { state.showModal? (
-      <Modal title={title} closeModal={toggleModal} show={state.showModal}>
-        
-        <div className="content">
-          <h2 className="title is-size-5">Description</h2>
-          <p className="">{farm.description}</p>
+            { detailModal.showDetailModal? (
+              <Modal title={title} closeModal={toggleDetailModal} show={detailModal.showDetailModal}>
+                
+              <DetailPage farm={farm} />
 
-          <h2 className="title is-size-5">Location</h2>
-          <p className="">{farm.location}</p>
+              </Modal>
+              ): null
+            }
 
-          <h2 className="title is-size-5">Start date</h2>
-          <p className="">{farm.start_date}</p>
 
-          <h2 className="title is-size-5"># units</h2>
-          <p className="">{ farm.units }</p>
+            { fundModal.showFundModal? (
+              <Modal title={title} closeModal={toggleFundModal} show={fundModal.showFundModal}>
+                
+                <FundPage farm={farm}/>
 
-          <h2 className="title is-size-5">Price per unit</h2>
-          <p className="">{ farm.price }</p>
+              </Modal>
+              ): null
+            }
 
-          <h2 className="title is-size-5">Duration</h2>
-          <p className="">{ farm.duration }</p>
 
-          <h2 className="title is-size-5">Farm stage</h2>
-          <p className="">{ farm.stage }</p>
-
-          <h2 className="title is-size-5">Profit Margin</h2>
-          <p className="">{ farm.margin }</p>
-        </div>
-
-      </Modal>
-    ): null
-    }
        </div>
   )
 }

@@ -1,6 +1,9 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getAllFarms } from '../../redux/actions/farmActionCreators';
+// import { getDundedFarms } from '../../redux/actions/farmActionCreators';
 
 import Farms from './Farms';
 
@@ -8,6 +11,10 @@ import './styles.scss';
 
 const Home = () => {
   const farms = useSelector(state => state.farm.allFarms);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllFarms());
+  } , [dispatch])
 
   return (
     <div className="container dashboard-home">

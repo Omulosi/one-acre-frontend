@@ -14,7 +14,7 @@ import {
 const initialState = {
   allFarms: [],
   showModal: false,
-  selectedFarm: {},
+  fundedFarms: [],
   searchQuery: '',
   loading: false,
 };

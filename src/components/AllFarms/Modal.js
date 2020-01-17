@@ -17,8 +17,6 @@ const Modal = ({
       { children }
       </section>
       <footer className="modal-card-foot">
-        <button className="button is-success">Fund</button>
-        <button className="button" onClick={closeModal}>Cancel</button>
       </footer>
     </div>
   </div>

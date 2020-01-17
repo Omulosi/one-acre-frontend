@@ -1,3 +1,7 @@
+.all-farms__content {
+  margin-top: 1rem !important;
+}
+
 .show-modal {
   display: block;
 }
@@ -34,4 +38,9 @@ dd {
 header.farm-title {
   border-bottom: 1px solid rgba(0,0,0,0.06);
   padding-bottom: 0.3em;
+}
+
+/* Fund Page */
+.farm-details {
+  border-bottom: 2px solid black;
 }
