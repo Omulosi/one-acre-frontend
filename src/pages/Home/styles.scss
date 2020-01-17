@@ -1,0 +1,29 @@
+.dashboard-home {
+  overflow-y: scroll;
+  min-height: 100vh;
+}
+
+.dashboard-home > h1 {
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}
+
+.dashboard-card {
+  margin: 0.5em;
+
+  h1 {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 0.5em;
+  }
+}
+
+.farm span {
+  display: inline-block;
+  margin-right: 0.5em;
+
+}
+
+.farm {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}

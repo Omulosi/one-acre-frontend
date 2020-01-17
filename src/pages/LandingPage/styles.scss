@@ -1,0 +1,86 @@
+/* responsive */
+@media (max-width: 768px) {
+	:root {
+		font-size: 90%;
+	}
+}
+
+/* helpers */
+hero {
+  color: #011b33;
+}
+
+.landing-logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #011b33;
+}
+
+.auth-btn > a {
+  color: #011b33 !important;
+}
+
+.hero-body h1,
+.hero-body h2 {
+  letter-spacing: 0.2em;
+}
+
+.hero-body h2 {
+  color: #666;
+}
+
+.hero-foot p {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.center, .center-column, .top, .right, .bottom, .left {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.center-column {
+    flex-direction: column;
+}
+
+.top    { align-items:     flex-start; }
+.right  { justify-content: flex-end;   }
+.bottom { align-items:     flex-end;   }
+.left   { justify-content: flex-start; }
+
+.single-spaced, .single-spaced * {
+    line-height: 1;
+}
+
+@media (max-width: 1024px) {
+	.desktop {
+		display: none;
+	}
+}
+
+@media (max-width: 512px) {
+    #grid {
+        grid-template-areas:
+            "a a a"
+            "b c d"
+            "e e e";
+    }
+}
+
+/* custom */
+.hero {
+	background: #011b33 url(../../assets/images/hero-1e.jpg) center / cover;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    background: black url(../../assets/images/hero-1e.jpg) center / cover;
+  }
+}
+
+@media (max-width:  768px) {
+  .hero {
+    background: black url(../../assets/images/hero-1e.jpg) center / cover;
+  }
+}
