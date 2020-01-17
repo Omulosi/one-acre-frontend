@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { LOADING, LOGIN, SET_ERRORS, CLEAR_ERRORS, UPDATE_USER_DETAILS } from '../types';
+import { LOADING, LOGIN, SET_ERRORS, UPDATE_USER_DETAILS } from '../types';
 import { axiosWithAuth } from '../../utils/axiosAuth';
 
 import { baseUrl } from '../../config/index';
 
 export const userLogin = (userData, history, setSubmitting) => dispatch => {
-  dispatch({ type: CLEAR_ERRORS });
+  dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/login`, {
       email: userData.email,
@@ -18,10 +18,9 @@ export const userLogin = (userData, history, setSubmitting) => dispatch => {
       });
       const token = data.data[0].access_token;
       localStorage.setItem('token', `${token}`);
-      localStorage.setItem('profile', JSON.stringify(user));
       history.push('/dashboard/profile');
       setSubmitting(false);
-
+      localStorage.setItem('profile', JSON.stringify(user));
     })
     .catch(err => {
       dispatch({
@@ -33,7 +32,7 @@ export const userLogin = (userData, history, setSubmitting) => dispatch => {
 };
 
 export const userSignUp = (userData, history, setSubmitting) => dispatch => {
-  dispatch({ type: CLEAR_ERRORS });
+  dispatch({ type: LOADING });
   axios
     .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {
@@ -50,10 +49,9 @@ export const userSignUp = (userData, history, setSubmitting) => dispatch => {
 };
 
 export const updateUser = (user, field, newData, setSubmitting) => dispatch => {
-  dispatch({ type: CLEAR_ERRORS });
   dispatch({ type: LOADING })
   axiosWithAuth()
-    .patch(`${baseUrl}/users/${user.id}/${field}`, newData)
+    .patch(`/users/${user.id}/${field}`, newData)
     .then(({ data }) => {
       const user = data.data[0];
       dispatch({
@@ -61,7 +59,6 @@ export const updateUser = (user, field, newData, setSubmitting) => dispatch => {
       });
       localStorage.setItem('profile', JSON.stringify(user));
       setSubmitting(false);
-      //window.location.reload(true);
 
     })
     .catch(err => {
@@ -69,7 +66,6 @@ export const updateUser = (user, field, newData, setSubmitting) => dispatch => {
         type: SET_ERRORS,
         payload: err.response.data
       });
-      setSubmitting(false);
     });
 };
 

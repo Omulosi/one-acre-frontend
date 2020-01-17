@@ -6,17 +6,20 @@ export const LOGOUT = 'LOGOUT';
 
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
 export const UPDATE_USER_DETAILS = 'UPDATE_USER_DETAILS';
+
 export const LOADING = 'LOADING';
+export const LOADING_UI = 'LOADING_UI';
+export const STOP_LOADING = 'STOP_LOADING';
 
-export const CREATE_TICKET = 'CREATE_TICKET';
-export const VIEW_TICKET = 'VIEW_TICKET';
-export const CLOSE_TICKET = 'CLOSE_TICKET';
-export const DELETE_TICKET = 'VIEW_TICKET';
+export const CREATE_FARM = 'CREATE_FARM';
+export const VIEW_FARM = 'VIEW_FARM';
+export const CLOSE_FARM = 'CLOSE_FARM';
+export const DELETE_FARM = 'VIEW_FARM';
 
-export const GET_ALL_TICKETS = 'GET_ALL_TICKETS';
-export const EDIT_TICKET = 'EDIT_TICKET';
+export const GET_ALL_FARMS = 'GET_ALL_FARMS';
+export const EDIT_FARM = 'EDIT_FARM';
 export const SEARCH_QUERY_CHANGE = 'SEARCH_QUERY_CHANGE';
-export const TOGGLE_CREATE_TICKET = 'TOGGLE_CREATE_TICKET';
+export const TOGGLE_CREATE_FARM = 'TOGGLE_CREATE_FARM';
 
 export const SET_ERRORS = 'SET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';

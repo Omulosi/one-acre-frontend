@@ -1,10 +1,10 @@
-import { LOGIN, LOADING, SET_ERRORS, UPDATE_USER_DETAILS, CLEAR_ERRORS } from '../types';
+import { LOGIN, LOADING, SET_ERRORS, UPDATE_USER_DETAILS, CLEAR_ERRORS, STOP_LOADING } from '../types';
 
 const initialState = {
   loading: false,
   credentials: {},
   errors: {},
-  authenticated: false
+  authenticated: false,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -29,6 +29,12 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         errors: {}
+      };
+
+    case STOP_LOADING:
+      return {
+        ...state,
+        loading: false
       };
 
     case SET_ERRORS:

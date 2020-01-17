@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect }  from 'react';
 import Farm from './Farm';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { getAllFarms } from '../../redux/actions/farmActionCreators';
 import './styles.scss';
 
-import resp from '../../data';
-console.log(resp.data);
 
-const AllFarms = () => {
-  const [farms, setFarms] = useState(resp.data);
+const AllFarms = ({ farm }) => {
+  const farms = useSelector(state => state.farm.allFarms);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllFarms());
+  } , [dispatch])
 
   return (
     <div className="container all-farms">

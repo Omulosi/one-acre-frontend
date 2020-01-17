@@ -1,13 +1,18 @@
-import React from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import Farms from './Farms';
 
 import './styles.scss';
 
 const Home = () => {
+  const farms = useSelector(state => state.farm.allFarms);
+
   return (
     <div className="container dashboard-home">
       <h1 className="title is-size-2">
-        Hello, John!
+        Hello!
       </h1>
       <hr />
       <div className="columns" >
@@ -15,26 +20,10 @@ const Home = () => {
           <h1 className="title is-size-4 is-center">Farms you have funded</h1>
           <hr />
           <div className="funded-farms">
-            <div className="farm">
-              <span className="is-size-5">{`Rice farm in Mwea`}</span>
-              <button className="button is-primary is-small is-outlined">
-                Farm Details
-              </button>
-            </div>
-            <div className="farm">
-              <span className="is-size-5">{`Rice farm in Mwea`}</span>
-              <button className="button is-primary is-small is-outlined">
-                Farm Details
-              </button>
-            </div>
+            <Farms farms={farms} />
           </div>
-            <div className="farm">
-              <span className="is-size-5">{`Rice farm in Mwea`}</span>
-              <button className="button is-primary is-small is-outlined">
-                Farm Details
-              </button>
-            </div>
-        </div>{/* end 1st col */}
+        </div>
+
         <div className="column card dashboard-card">
           <h1 className="title is-size-4">How to fund a Farm</h1>
           <div className="funding-farm">
