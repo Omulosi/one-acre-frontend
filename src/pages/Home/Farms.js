@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Farm from './Farm';
+import FarmWrapper from '../../components/AllFarms/FarmWrapper';
 
 const Farms = ({ farms }) => {
   if (farms.length === 0) {
@@ -12,13 +13,26 @@ const Farms = ({ farms }) => {
   }
 
   return (
-    <>
+    <div className="dashboard-home__funded-farms">
       {
         farms.map((farm) => (
-        <Farm name={farm.name} />
+        <FarmWrapper title={farm.name} farm={farm} key={farm.id}>
+          {
+            
+            ({title, toggleDetailModal, toggleFundModal, farm}) => (
+              <Farm 
+                title={title} 
+                farm={farm} 
+                toggleDetailModal={toggleDetailModal}
+                toggleFundModal={toggleFundModal}
+              />
+          )
+        }
+        </FarmWrapper>
+
         ))
       }
-    </>
+    </div>
   )
 };
 

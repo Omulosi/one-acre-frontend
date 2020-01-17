@@ -1,6 +1,13 @@
 .dashboard-home {
   overflow-y: scroll;
+  overflow-x: hidden;
   min-height: 100vh;
+}
+
+.dashboard-home__funded-farms {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100%;
 }
 
 .dashboard-home > h1 {
@@ -26,4 +33,6 @@
 .farm {
   padding-bottom: 0.3em;
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  width: 100% !important;
+  justify-content: space-between;
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Farm = ({name}) => {
-  return (
+const Farm = ({ toggleDetailModal, farm}) => {
 
-      <div className="farm">
-        <span className="is-size-5">{name}</span>
-        <button className="button is-info is-small is-outlined">
-          Farm Details
+  return (
+      <div className="farm is-flex">
+        <span className="is-size-5 is-block">{farm.name}</span>
+        <button className="button is-info is-small is-outlined" 
+          onClick={toggleDetailModal} style={{marginRight: '0.5em'}}>
+          Details
         </button>
       </div>
   );

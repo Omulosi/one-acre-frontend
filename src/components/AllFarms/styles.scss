@@ -6,11 +6,17 @@
   display: block;
 }
 
+/* All Farms */
 .all-farms {
   .buttons {
     padding: 1em;
     text-align: center;
   }
+}
+
+.all-farms__content .notification {
+  width: 90% !important;
+  text-align: center;
 }
 
 .farm {
