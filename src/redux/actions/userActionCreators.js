@@ -11,12 +11,11 @@ from '../types';
 import { axiosWithAuth } from '../../utils/axiosAuth';
 
 import { baseUrl } from '../../config/index';
-console.log(baseUrl)
 
 export const userLogin = (userData, history, setSubmitting) => dispatch => {
   dispatch({ type: LOADING });
   axios
-    .post(`${baseUrl}/api/auth/login`, {
+    .post(`${baseUrl}/auth/login`, {
       email: userData.email,
       password: userData.password
     })
@@ -43,7 +42,7 @@ export const userLogin = (userData, history, setSubmitting) => dispatch => {
 export const userSignUp = (userData, history, setSubmitting) => dispatch => {
   dispatch({ type: LOADING });
   axios
-    .post(`${baseUrl}/api/auth/register`, userData)
+    .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {
       dispatch(userLogin(userData, history, setSubmitting));
       setSubmitting(false);
