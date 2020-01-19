@@ -3,7 +3,7 @@ import Modal from './Modal';
 import FundPage from './FundPage';
 import DetailPage from './DetailPage';
 
-const FarmWrapper = ({ title, farm, children }) => {
+const FarmWrapper = ({ title, farm, user, children }) => {
   const [detailModal, setDetailModal] = useState({showDetailModal: false});
   const [fundModal, setFundModal] = useState({showFundModal: false});
 
@@ -18,13 +18,11 @@ const FarmWrapper = ({ title, farm, children }) => {
   return (
         <div className="column is-5 card farm">
           <div className="farm-detail">
-            { children({ title, toggleDetailModal, toggleFundModal, farm}) }
+            { children({ title, toggleDetailModal, toggleFundModal, farm, user}) }
           </div>
             { detailModal.showDetailModal? (
               <Modal title={title} closeModal={toggleDetailModal} show={detailModal.showDetailModal}>
-                
-              <DetailPage farm={farm} />
-
+                <DetailPage farm={farm} />
               </Modal>
               ): null
             }
@@ -32,8 +30,7 @@ const FarmWrapper = ({ title, farm, children }) => {
 
             { fundModal.showFundModal? (
               <Modal title={title} closeModal={toggleFundModal} show={fundModal.showFundModal}>
-                
-                <FundPage farm={farm}/>
+                <FundPage farm={farm} />
 
               </Modal>
               ): null

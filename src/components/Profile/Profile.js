@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCheck, FaTimes, FaSpinner } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 import { Formik, Field, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../redux/actions/userActionCreators';
@@ -18,17 +18,23 @@ const Profile = ({ user }) => {
     bank_name,
   } = user;
 
+
   const dispatch = useDispatch();
   const errors = useSelector(state => state.user.errors);
-  const loading = useSelector(state => state.farm.loading);
+  const loading = useSelector(state => state.user.editting);
 
   const registered = new Date(createdon);
   const timeSinceRegisteration = moment(registered).fromNow();
 
   const [showUpdate, setShowUpdate] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const toggleNotification = (e) => {
     setShowUpdate(!showUpdate);
+  }
+
+  const toggleEdit = (e) => {
+    setEdit(!edit);
   }
 
   return (
@@ -66,43 +72,58 @@ const Profile = ({ user }) => {
         <div>Member from {timeSinceRegisteration}</div>
       </div>
     </div>
-
+    
     <div className="columns profile-main-section ">
       <div className="column is-4 profile-info card  is-12">
-          <div className="title is-size-6 name">Bank Information</div>
+          <div className="title is-size-6 profile-info__bank-details">
+            <span>Bank Information</span>
+            <span onClick={toggleEdit} className="edit-icon has-text-info is-flex">
+              {
+                edit
+                  ? <FaTimes />
+                  : <FaEdit />
+              }
+            </span>
+          </div>
           <p className="help is-danger center">{errors.error}</p>
-          <div className="center is-primary">{ loading? <FaSpinner />: null }</div>
+          <div className="center has-text-primary">
+            { loading? "Updating...": null }
+          </div>
           <div className="email">
             <span className="is-size-6" style={{color: '#333'}}>Bank name</span>
-
-            <Formik
-              initialValues={{bank_name: `${bank_name || ''}`,}}
-              onSubmit={(values, { setSubmitting }) => {
-                dispatch(updateUser(user, 'bank_name', values, setSubmitting))
-              }}
-            >
-              <Form>
-                <div className="field has-addons">
-                  <div className="control is-expanded">
-                    <Field className="input is-info" type="text" name="bank_name"/>
+            { 
+              edit
+             ? <Formik
+                initialValues={{bank_name: `${bank_name || ''}`}}
+                onSubmit={(values, { setSubmitting }) => {
+                  dispatch(updateUser(user, 'bank_name', values))
+                }}
+              >
+                <Form>
+                  <div className="field has-addons">
+                    <div className="control is-expanded">
+                      <Field className="input is-info" type="text" name="bank_name"/>
+                    </div>
+                    <div className="control">
+                      <button 
+                          type="submit" 
+                          className="button is-info"
+                          title='Click to edit'>
+                        Edit
+                      </button>
+                    </div>
                   </div>
-                  <div className="control">
-                    <button 
-                        type="submit" 
-                        className="button is-info"
-                        title='Click to edit'>
-                      Edit
-                    </button>
-                  </div>
-                </div>
-              </Form>
-            </Formik>
+                </Form>
+              </Formik>
+              : <span className="">{bank_name}</span>
+            }
           </div>
 
           <div className="email">
             <span className="is-size-6" style={{color: '#333'}}>Bank account number</span>
-
-            <Formik
+          {     
+           edit
+            ?<Formik
               initialValues={{bank_account_num: `${bank_account_num || ''}`,}}
               onSubmit={(values, { setSubmitting }) => {
                 dispatch(updateUser(user, 'bank_account_num', values, setSubmitting))
@@ -123,36 +144,40 @@ const Profile = ({ user }) => {
                   </div>
                 </div>
               </Form>
-
             </Formik>
+            :<span className="">{bank_account_num}</span>
+          }
           </div>
 
 
           <div className="email">
             <span className="is-size-6" style={{color: '#333'}}>Bank Account Name</span>
-
-            <Formik
-              initialValues={{bank_account_name: `${bank_account_name || ''}`,}}
-              onSubmit={(values, { setSubmitting }) => {
-                dispatch(updateUser(user, 'bank_account_name', values, setSubmitting))
-              }}
-            >
-              <Form>
-                <div className="field has-addons">
-                  <div className="control is-expanded">
-                    <Field className="input is-info" type="text" name="bank_account_name"/>
+          {
+            edit
+              ?<Formik
+                initialValues={{bank_account_name: `${bank_account_name || ''}`,}}
+                onSubmit={(values, { setSubmitting }) => {
+                  dispatch(updateUser(user, 'bank_account_name', values, setSubmitting))
+                }}
+              >
+                <Form>
+                  <div className="field has-addons">
+                    <div className="control is-expanded">
+                      <Field className="input is-info" type="text" name="bank_account_name"/>
+                    </div>
+                    <div className="control">
+                      <button 
+                        type="submit"
+                        className="button is-info" 
+                        title='Click to edit'>
+                        Edit
+                      </button>
+                    </div>
                   </div>
-                  <div className="control">
-                    <button 
-                      type="submit"
-                      className="button is-info" 
-                      title='Click to edit'>
-                      Edit
-                    </button>
-                  </div>
-                </div>
-              </Form>
-            </Formik>
+                </Form>
+              </Formik>
+              :<span>{bank_account_name}</span>
+          }
           </div>
       </div>
 

@@ -1,9 +1,10 @@
-.all-farms__content {
-  margin-top: 1rem !important;
-}
-
-.show-modal {
-  display: block;
+.modal-card-head {
+  position:relative;
+  .notification {
+    position: absolute;
+    width: 90vw;
+    top: 0;
+  }
 }
 
 /* All Farms */
@@ -12,6 +13,7 @@
     padding: 1em;
     text-align: center;
   }
+  min-height: 100vh;
 }
 
 .all-farms__content .notification {
@@ -19,26 +21,12 @@
   text-align: center;
 }
 
-.farm {
-  margin: 0.4em;
+.all-farms__content {
+  margin-top: 1rem !important;
 }
 
-dl {
-  width: 100%;
-  overflow: hidden;
-  padding: 0.3em;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-dt {
-  float: left;
-  width: 50%;
-  padding: 0.3em;
-  font-weight: bold;
-}
-dd {
-  float: left;
-  width: 50%;
-  padding: 0.3em;
+.farm {
+  margin: 0.4em;
 }
 
 header.farm-title {
@@ -49,4 +37,20 @@ header.farm-title {
 /* Fund Page */
 .farm-details {
   border-bottom: 2px solid black;
+}
+
+/* Modal */
+.show-modal {
+  display: block;
+}
+
+.modal {
+  overflow: scroll !important;
+}
+
+.farm-edit__btn {
+  text-decoration: none;
+  &:hover {
+    color: #fff;
+  }
 }

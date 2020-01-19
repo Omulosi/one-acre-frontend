@@ -72,3 +72,14 @@
   margin-top: 1.6em;
   color: #6c757d;
 }
+
+.profile-info__bank-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}

@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const Farm = ({ title, toggleDetailModal, toggleFundModal, farm }) => {
+const Farm = ({ title, toggleDetailModal, toggleFundModal, farm, user }) => {
+  const history = useHistory();
 
   return (
         <>
@@ -11,26 +14,49 @@ const Farm = ({ title, toggleDetailModal, toggleFundModal, farm }) => {
               null
             }
           </header>
-          <dl style={{marginBottom: '0.9em', paddingBottom:'0.5em'}}>
-            <dt>{ farm.location &&  `Location` }</dt>
-            <dd>{ farm.location }</dd>
-            <dt>{ farm.price &&  `Price` }</dt>
-            <dd>{ farm.price }</dd>
-            <dt>{ farm.units && `units` }</dt>
-            <dd>{farm.units}</dd>
-            <dt>{ farm.duration && `Duration` }</dt>
-            <dd>{ farm.duration }</dd>
-            <dt>{ farm.margin && `Profit Margin` }</dt>
-            <dd>{ farm.margin }</dd>
-          </dl>
-          <button className="button is-info is-small is-outlined" 
-            onClick={toggleDetailModal} style={{marginRight: '0.5em'}}>
-            Details
-          </button>
-          <button className="button is-info is-small" 
+          <table className="table is-fullwidth is-stripped">
+            <tbody>
+              <tr>
+                <th>{ farm.location &&  `Location` }</th>
+                <td>{ farm.location }</td>
+              </tr>
+              <tr>
+                <th>{ farm.price &&  `Price` }</th>
+                <td>{ farm.price }</td>
+              </tr>
+              <tr>
+                <th>{ farm.units && `units` }</th>
+                <td>{farm.units}</td>
+              </tr>
+              <tr>
+                <th>{ farm.duration && `Duration` }</th>
+                <td>{ farm.duration }</td>
+              </tr>
+            </tbody>
+          </table>
+        { user.role === "0"
+          ?(<button className="button is-info is-small is-outlined" 
+                onClick={toggleDetailModal} style={{marginRight: '0.5em'}}>
+                Details
+              </button>
+          )
+          :null
+        }
+        { user.role === "1"
+          ?(<button className="button is-info is-small is-outlined" 
+                 style={{marginRight: '0.5em'}}>
+                <Link to={`/dashboard/farms/${farm.id}`} className="farm-edit__btn">Details</Link>
+              </button>
+          )
+          :null
+        }
+        {user.role === "0" 
+         ? (<button className="button is-info is-small" 
             onClick={toggleFundModal}>
             Fund
-          </button>
+          </button>)
+         : null 
+        }
         </>
   )
 }

@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { LOADING, LOGIN, SET_ERRORS, UPDATE_USER_DETAILS } from '../types';
+import { 
+  LOADING,
+  LOGIN,
+  SET_ERRORS,
+  UPDATE_USER_DETAILS,
+  EDITTING_USER,
+  LOGOUT
+}
+from '../types';
 import { axiosWithAuth } from '../../utils/axiosAuth';
 
 import { baseUrl } from '../../config/index';
@@ -20,12 +28,12 @@ export const userLogin = (userData, history, setSubmitting) => dispatch => {
       localStorage.setItem('token', `${token}`);
       history.push('/dashboard/profile');
       setSubmitting(false);
-      localStorage.setItem('profile', JSON.stringify(user));
     })
     .catch(err => {
+      let error = err.response? err.response.data: err
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: error,
       });
       setSubmitting(false);
     });
@@ -40,16 +48,17 @@ export const userSignUp = (userData, history, setSubmitting) => dispatch => {
       setSubmitting(false);
     })
     .catch(err => {
+      let error = err.response? err.response.data: err
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data,
+        payload: error,
       });
       setSubmitting(false);
     });
 };
 
-export const updateUser = (user, field, newData, setSubmitting) => dispatch => {
-  dispatch({ type: LOADING })
+export const updateUser = (user, field, newData) => dispatch => {
+  dispatch({ type: EDITTING_USER })
   axiosWithAuth()
     .patch(`/users/${user.id}/${field}`, newData)
     .then(({ data }) => {
@@ -58,14 +67,21 @@ export const updateUser = (user, field, newData, setSubmitting) => dispatch => {
         type: UPDATE_USER_DETAILS, payload: user
       });
       localStorage.setItem('profile', JSON.stringify(user));
-      setSubmitting(false);
 
     })
     .catch(err => {
+      let error = err.response? err.response.data: err
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: error,
       });
     });
 };
 
+export const logout = history => dispatch => {
+  localStorage.removeItem('token');
+  localStorage.setItem('reduxState', null);
+  dispatch({ type: LOGOUT });
+  history.push('/login');
+  window.location.reload(true);
+};

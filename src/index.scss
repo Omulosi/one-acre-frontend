@@ -348,3 +348,70 @@ body {
     font-size: var(--fs-body);
     line-height: 1.6;
 }
+
+.static-navbar {
+  display: none;
+  @media (max-width: 768px) {
+    display: flex;
+    z-index: 99999;
+  }
+}
+
+.gradient {
+    background-image: linear-gradient(to bottom, #fff, #eee);
+}
+
+.basic-notification {
+  position: fixed;
+  top: 10vh;
+  width: 70vw;
+  z-index: 99;
+  margin-right: 2rem;
+
+}
+
+.not-found {
+  display: flex;
+  width:100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* These styles are repeated from AddFarm component */
+
+.add-farm-section {
+    margin-top: 30px;
+    margin-bottom: 70px;
+    margin: 2em 1.5em 4em;
+
+}
+
+
+.card-main {
+    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.1);
+    background-color: #fff;
+    margin-bottom: 40px;
+    padding: 40px 60px;
+    position: relative;
+}
+
+.add-farm-card__heading {
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.3px;
+}
+
+.button--primary {
+    background-color: #6abfc3 !important;
+    color: #fff !important;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    &:hover {
+    opacity: 0.8;
+    color: #fff;
+    text-decoration: none;
+  }
+}

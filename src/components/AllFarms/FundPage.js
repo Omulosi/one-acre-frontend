@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus} from 'react-icons/fa';
+import { useDispatch, useSelector  } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { fundFarm } from '../../redux/actions/farmActionCreators';
 
 const FundPage = ({ farm }) => {
-  const price = 5000;
 
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect( () => {
+    dispatch({type: 'CLEAR_ERRORS'})
+  },[dispatch])
+
+
+  const error = useSelector(state => state.farm.error);
+  const loading = useSelector(state => state.farm.loading);
+
+  const totalMargin = 1 + Number(farm.margin/100);
   let [units, setUnits] = useState(1);
-  let [total, setTotal] = useState(() => 1 * price);
-  let [payout, setPayout] = useState(() => (1+0.2)*price);
+  let [total, setTotal] = useState(() => 1 * farm.price);
+  let [payout, setPayout] = useState(() => totalMargin * farm.price);
 
   const increment = () => {
     if (units >= farm.units){
       return;
     } else {
       units = units + 1;
-      total = units * price;
-      payout = (1+0.2) * total;
+      total = units * farm.price;
+      payout = (totalMargin) * total;
       setUnits(units);
       setTotal(total);
       setPayout(payout);
@@ -26,12 +41,17 @@ const FundPage = ({ farm }) => {
       return;
     } else {
       units = units - 1;
-      total = units * price;
-      payout = (1+0.2) * total
+      total = units * farm.price;
+      payout = (totalMargin) * total
       setUnits(units);
       setTotal(total);
       setPayout(payout);
     }
+  }
+
+  const confirmTransaction = () => {
+    let data = {name: farm.name, status: 'pending', id: farm.id, units, amount: total, payout}
+    dispatch(fundFarm(history, data));
   }
 
   return (
@@ -39,12 +59,12 @@ const FundPage = ({ farm }) => {
 
       <div className="farm-details">
         <table className="table">
+          <tbody>
             <tr>
               <th>{`Name of farm`}</th>
               <td>{ farm.name || '' }</td>
               <td></td>
             </tr>
-          <tbody>
             <tr>
               <th>{`Number of units`}</th>
               <td>
@@ -61,7 +81,7 @@ const FundPage = ({ farm }) => {
             </tr>
             <tr>
               <th>Unit Price</th>
-              <td>{ price }</td>
+              <td>{ farm.price }</td>
               <td></td>
             </tr>
             <tr>
@@ -71,7 +91,7 @@ const FundPage = ({ farm }) => {
             </tr>
             <tr>
               <th>{`ROI`}</th>
-              <td>{`20% in 9 months`}</td>
+              <td>{`${farm.margin}% in 9 months`}</td>
               <td></td>
             </tr>
             <tr>
@@ -112,9 +132,13 @@ const FundPage = ({ farm }) => {
           </tbody>
         </table>
 
-        <button  className="button is-primary">
+        <button  
+          className={`button is-primary ${loading? 'is-loading': ''}`}
+          onClick={confirmTransaction}
+        >
           Confirm Transacttion
         </button>
+        <p className="help is-danger">{`${error? error: ''}`}</p>
       </div>
       
     </div>

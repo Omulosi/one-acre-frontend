@@ -72,15 +72,3 @@ hero {
 .hero {
 	background: #011b33 url(../../assets/images/hero-1e.jpg) center / cover;
 }
-
-@media (max-width: 1024px) {
-  .hero {
-    background: black url(../../assets/images/hero-1e.jpg) center / cover;
-  }
-}
-
-@media (max-width:  768px) {
-  .hero {
-    background: black url(../../assets/images/hero-1e.jpg) center / cover;
-  }
-}

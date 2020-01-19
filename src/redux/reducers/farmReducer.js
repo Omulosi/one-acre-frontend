@@ -1,22 +1,26 @@
 import {
   GET_ALL_FARMS,
   CREATE_FARM,
-  EDIT_FARM,
-  DELETE_FARM,
-  VIEW_FARM,
-  CLOSE_FARM,
   SEARCH_QUERY_CHANGE,
   LOADING_UI,
-  TOGGLE_CREATE_FARM,
-  STOP_LOADING
+  GET_FUNDED_FARMS,
+  SET_ERRORS,
+  CLEAR_ERRORS,
+  FUND_FARM,
+  SUCCESS,
+  UPDATE_FARM,
+  DELETE_FARM
 } from '../types';
 
 const initialState = {
   allFarms: [],
-  showModal: false,
   fundedFarms: [],
+  showModal: false,
   searchQuery: '',
   loading: false,
+  errors: {},
+  error: '',
+  showNotification: false
 };
 
 export const farmReducer = (state = initialState, action) => {
@@ -25,20 +29,31 @@ export const farmReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        showNotification: false,
         allFarms: action.payload
+      };
+
+    case GET_FUNDED_FARMS:
+      return {
+        ...state,
+        loading: false,
+        showNotification: false,
+        fundedFarms: action.payload
       };
 
     case CREATE_FARM:
       return {
         ...state,
         loading: false,
+        showNotification: true,
         allFarms: [...state.allFarms, action.payload]
       };
 
-    case EDIT_FARM:
+    case UPDATE_FARM:
       return {
         ...state,
         loading: false,
+        showNotification: false,
         allFarms: state.allFarms.map(farm =>
           farm.id === action.payload.id ? action.payload : farm
         )
@@ -50,11 +65,28 @@ export const farmReducer = (state = initialState, action) => {
         loading: true
       };
 
-    case STOP_LOADING:
+    case SET_ERRORS:
       return {
         ...state,
+        errors: action.payload,
+        error: action.payload,
         loading: false
       };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: {},
+        error: '',
+        loading: false,
+      };
+
+    case FUND_FARM:
+      return {
+        ...state,
+        loading: false,
+        fundedFarms: [...state.fundedFarms, ...action.payload]
+      }
 
     case SEARCH_QUERY_CHANGE:
       return {
@@ -62,20 +94,11 @@ export const farmReducer = (state = initialState, action) => {
         searchQuery: action.payload
       };
 
-    case VIEW_FARM:
+    case SUCCESS:
       return {
         ...state,
-        showModal: true,
-        selectedFarm: state.allFarms.find(
-          farm => farm.id === action.payload
-        )
-      };
-
-    case CLOSE_FARM:
-      return {
-        ...state,
-        showModal: false,
-        selectedFarm: {}
+        loading: false,
+        showNotification: false
       };
 
     case DELETE_FARM:
@@ -87,11 +110,6 @@ export const farmReducer = (state = initialState, action) => {
         )
       };
 
-    case TOGGLE_CREATE_FARM:
-      return {
-        ...state,
-        showCreateFarm: !state.showCreateFarm
-      };
     default:
       return state;
   }

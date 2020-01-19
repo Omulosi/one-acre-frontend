@@ -28,7 +28,7 @@ const DetailPage = ({ farm }) => {
           
           <tr>
             <th className="title is-size-5">Price per unit</th>
-            <td className="">{ farm.price }</td>
+            <td className="">{ `${farm.price} KES` }</td>
           </tr>
           
           <tr>

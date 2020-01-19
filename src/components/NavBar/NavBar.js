@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import toggleNavbar from '../../utils/toggleNavbar';
+import { logout } from '../../redux/actions/userActionCreators';
 
 import './styles.scss';
 
 const NavBar = ({user}) => {
+  const history = useHistory()
+  const dispatch = useDispatch()
   return (
-    <div>
+    <div className="nav-bar-container">
 
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand" >
@@ -45,9 +49,9 @@ const NavBar = ({user}) => {
                     Bank Account
                   </Link>
                   <hr className="navbar-divider"/>
-                  <a href="#" className="navbar-item">
+                  <Link to="/"  className="navbar-item" onClick={() => dispatch(logout(history))}>
                     Sign Out
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

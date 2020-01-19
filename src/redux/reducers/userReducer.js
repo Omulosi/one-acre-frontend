@@ -1,10 +1,20 @@
-import { LOGIN, LOADING, SET_ERRORS, UPDATE_USER_DETAILS, CLEAR_ERRORS, STOP_LOADING } from '../types';
+import { 
+  LOGIN,
+  LOADING,
+  SET_ERRORS,
+  UPDATE_USER_DETAILS,
+  CLEAR_ERRORS,
+  STOP_LOADING,
+  EDITTING_USER,
+  LOGOUT
+} from '../types';
 
 const initialState = {
   loading: false,
   credentials: {},
   errors: {},
   authenticated: false,
+  editting: false
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -21,13 +31,21 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         credentials: action.payload,
-        loading: false
+        loading: false,
+        editting: false
       };
 
     case LOADING:
       return {
         ...state,
         loading: true,
+        errors: {}
+      };
+
+    case EDITTING_USER:
+      return {
+        ...state,
+        editting: true,
         errors: {}
       };
 
@@ -41,13 +59,18 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: action.payload,
-        loading: false
+        loading: false,
+        editting: false
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         errors: {},
       };
+
+    case LOGOUT:
+      return initialState;
 
     default:
       return state;

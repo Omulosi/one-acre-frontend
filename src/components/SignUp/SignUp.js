@@ -23,7 +23,7 @@ const SignUP = () => {
         email: '',
         password:'',
         password2:'',
-        role:'',
+        role:'0',
         errors: ''
       },
     validationSchema: Yup.object({
@@ -111,7 +111,9 @@ const SignUP = () => {
                   type="radio" 
                   onChange={formik.handleChange}
                   name="role" 
-                  value={0}/>
+                  value={0}
+                  checked
+                />
                 {' '}I am a Funder
               </label>
               <label className="radio">
