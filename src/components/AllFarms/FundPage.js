@@ -15,7 +15,7 @@ const FundPage = ({ farm }) => {
   },[dispatch])
 
 
-  const error = useSelector(state => state.farm.error);
+  const errors = useSelector(state => state.farm.errors);
   const loading = useSelector(state => state.farm.loading);
 
   const totalMargin = 1 + Number(farm.margin/100);
@@ -138,7 +138,7 @@ const FundPage = ({ farm }) => {
         >
           Confirm Transacttion
         </button>
-        <p className="help is-danger">{`${error? error: ''}`}</p>
+        <p className="help is-danger">{`${errors.error || ''}`}</p>
       </div>
       
     </div>
