@@ -30,10 +30,10 @@ export const userLogin = (userData, history, setSubmitting) => dispatch => {
       setSubmitting(false);
     })
     .catch(err => {
-      let error = err.response? err.response.data: err
+      let error = err.response? err.response.data.error: err.message
       dispatch({
         type: SET_ERRORS,
-        payload: error,
+        payload: { error },
       });
       setSubmitting(false);
     });
@@ -44,14 +44,20 @@ export const userSignUp = (userData, history, setSubmitting) => dispatch => {
   axios
     .post(`${baseUrl}/auth/register`, userData)
     .then(({ data }) => {
-      dispatch(userLogin(userData, history, setSubmitting));
+      const user = data.data[0].user;
+      dispatch({
+        type: LOGIN, payload: user
+      });
+      const token = data.data[0].access_token;
+      localStorage.setItem('token', `${token}`);
+      history.push('/dashboard/profile');
       setSubmitting(false);
     })
     .catch(err => {
-      let error = err.response? err.response.data: err
+      let error = err.response? err.response.data.error: err.message
       dispatch({
         type: SET_ERRORS,
-        payload: error,
+        payload: { error },
       });
       setSubmitting(false);
     });
@@ -70,10 +76,10 @@ export const updateUser = (user, field, newData) => dispatch => {
 
     })
     .catch(err => {
-      let error = err.response? err.response.data: err
+      let error = err.response? err.response.data.error: err.message
       dispatch({
         type: SET_ERRORS,
-        payload: error,
+        payload: {error},
       });
     });
 };
