@@ -30,8 +30,8 @@ export const getFundedFarms = (history) => dispatch => {
       if (err.response && err.response.status === 422){
         history.push('/login');
       }
-      let error = err.response? err.response.data: err
-      dispatch({type: SET_ERRORS, payload: error})
+      let error = err.response? err.response.data.error: err.message
+      dispatch({type: SET_ERRORS, payload: { error }})
     });
 };
 
@@ -56,8 +56,8 @@ export const getAllFarms = (history) => dispatch => {
         history.push('/login');
         return;
       }
-      let error = err.response? err.response.data: err
-      dispatch({type: SET_ERRORS, payload: error})
+      let error = err.response? err.response.data.error: err.message
+      dispatch({type: SET_ERRORS, payload: { error }})
     });
 };
 
@@ -70,8 +70,8 @@ export const fundFarm = (history, farm) => (dispatch) => {
       window.location.reload(true);
     })
     .catch(err => {
-      let error = err.response? err.response.data: err.message
-      dispatch({type: SET_ERRORS, payload: error})
+      let error = err.response? err.response.data.error: err.message
+      dispatch({type: SET_ERRORS, payload: { error }})
     })
 }
 
@@ -88,6 +88,8 @@ export const createFarm = farmDetails => dispatch => {
     })
     .catch(err => {
       dispatch(getAllFarms());
+      let error = err.response? err.response.data.error: err.message
+      dispatch({type: SET_ERRORS, payload: { error }})
     });
 };
 
@@ -102,8 +104,8 @@ export const deleteFarm = id => dispatch => {
       });
     })
     .catch(err => {
-      let error = err.response? err.response.data: err
-      dispatch({type: SET_ERRORS, payload: error})
+      let error = err.response? err.response.data.error: err.message
+      dispatch({type: SET_ERRORS, payload: { error }})
     })
 };
 
@@ -115,7 +117,8 @@ export const updateFarm = (farm, field, values) => (dispatch) => {
       dispatch({type: UPDATE_FARM, payload: data.data[0]})  
     })
     .catch(err => {
-      let error = err.response? err.response.data: err
-      dispatch({type: SET_ERRORS, payload: error})
+      debugger
+      let error = err.response? err.response.data.error: err.message
+      dispatch({type: SET_ERRORS, payload: { error }})
     })
 }

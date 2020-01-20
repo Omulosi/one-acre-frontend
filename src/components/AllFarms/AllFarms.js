@@ -59,7 +59,7 @@ const AllFarms = ({ farm }) => {
           )
         })
         : <div className={`notification ${errors? 'is-danger': 'is-info'}`}>
-            {errors? errors.message : "No farms to display yet"}
+            {errors.error || "No farms to display yet"}
           </div>
       }
       </div>

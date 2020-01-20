@@ -15,6 +15,7 @@ const EditFarm = () => {
 
   const toggleEdit = (e) => {
     setEdit(!edit);
+    dispatch({type: 'CLEAR_ERRORS'})
   }
 
   const errors = useSelector(state => state.farm.errors);
