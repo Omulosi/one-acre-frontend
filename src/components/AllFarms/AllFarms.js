@@ -16,21 +16,28 @@ const AllFarms = ({ farm }) => {
   const user = useSelector(state => state.user.credentials);
   const dispatch = useDispatch();
   const history = useHistory();
+
   useEffect(() => {
     dispatch(getAllFarms(history));
+    dispatch({type: 'CLEAR_ERRORS'})
   } , [dispatch, history])
   
   let farms = [];
+  // farmer
   if (user.role === "1") {
     farms = allFarms.filter(farm => farm.createdby===user.id)
   } 
 
+  // FUNDER
   if (user.role === "0") {
-    farms = allFarms;
+    farms = allFarms.filter(farm => farm.active);
+    // farms = allFarms.filter(farm => farm.createdby===user.id)
   }
 
   return (
     <div className="container all-farms" id="all-farms">
+      <p className="has-text-danger center is-size-5">{errors.error || ''}</p>
+
     { user.role==="1"
       ?<h2 className="add-farm-card__heading"> These are all the farms you have added</h2>
       : null

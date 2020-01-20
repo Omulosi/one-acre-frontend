@@ -22,7 +22,7 @@ const LandingPage = () => {
                 <Link to="/signup" className="navbar-item desktop has-text-black desktop">SIGN UP</Link>
                 <figure className="navbar-item image">
                   <Link to="/dashboard">
-                    <i className="fas fa-3x fa-bars has-text-black"
+                    <i className="fas fa-3x fa-bars has-text-white"
                       style={{width: "1rem", height: "1rem"}}></i>
                   </Link>
                 </figure>
@@ -32,15 +32,15 @@ const LandingPage = () => {
           
           <header className="hero-body">
             <div className="is-overlay has-text-centered single-spaced" style={{top: "92px"}}>
-              <h1 className="title is-1" style={{color: '#011b33'}}>Fund</h1>
-              <h2 className="title is-2" style={{color: '#011b33'}}>A Farmer</h2>
+              <h1 className="title is-1" style={{color: '#fff'}}>Fund</h1>
+              <h2 className="title is-2" style={{color: '#fff'}}>A Farmer</h2>
             </div>
           </header>
           
           <main className="hero-foot center" style={{padding: "2rem", marginTop: '2rem'}}>
             <div  style={{width: "30rem"}}>
               <div className="center-column">
-                <p className="has-text-centered has-text-white">
+                <p className="has-text-centered" style={{color: '#fff'}}>
                   A crowdfunding platform for helping farmers get easy access to funds to support their activities
                 </p>
               </div>

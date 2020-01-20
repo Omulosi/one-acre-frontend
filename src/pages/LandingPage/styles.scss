@@ -13,11 +13,13 @@ hero {
 .landing-logo {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #011b33;
+  color: #fff;
 }
 
 .auth-btn > a {
-  color: #011b33 !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .hero-body h1,
@@ -68,7 +70,7 @@ hero {
     }
 }
 
-/* custom */
+/* custom*/
 .hero {
-	background: #011b33 url(../../assets/images/hero-1e.jpg) center / cover;
+	background: #011b33 url(../../assets/images/hero-e.jpg) center / cover;
 }

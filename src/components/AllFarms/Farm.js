@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 const Farm = ({ title, toggleDetailModal, toggleFundModal, farm, user }) => {
-  const history = useHistory();
 
   return (
         <>
           <header className="farm-title">
             <span className="title is-size-5">{ title }</span>
-            {farm.stage && farm.stage === 'closed'? 
-              (<span className="tag is-danger">closed</span>):
-              null
+            {
+              farm.stage && farm.stage === 'closed'
+              ? (<span className="tag is-danger">closed</span>)
+              : farm.stage === 'open'
+              ? (<span className="tag is-success">open</span>)
+              : null
             }
           </header>
           <table className="table is-fullwidth is-stripped">

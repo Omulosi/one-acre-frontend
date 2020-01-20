@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 import { Formik, Field, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +22,10 @@ const Profile = ({ user }) => {
   const dispatch = useDispatch();
   const errors = useSelector(state => state.user.errors);
   const loading = useSelector(state => state.user.editting);
+
+  useEffect( () => {
+    dispatch({type: 'CLEAR_ERRORS'})
+  },[dispatch])
 
   const registered = new Date(createdon);
   const timeSinceRegisteration = moment(registered).fromNow();

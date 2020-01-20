@@ -10,9 +10,8 @@ import './style.scss';
 
 
 const Login = () => {
-
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({type: 'CLEAR_ERRORS'});
   },[dispatch])
