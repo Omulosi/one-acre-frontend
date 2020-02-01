@@ -24,9 +24,6 @@ const NavBar = ({user}) => {
 
           <div  id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-end">
-              <Link to="/" className="navbar-item">
-                Home
-              </Link>
 
               <Link to="/dashboard" className="navbar-item">
                 Our Process
