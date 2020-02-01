@@ -49,7 +49,7 @@ const Login = () => {
         <form className="auth-form" onSubmit={formik.handleSubmit}>
           <h1 className="auth-title">Login</h1>
 
-          <p className="help is-danger center">{errors.error}</p>
+          <p className="help is-danger center">{errors && errors.error}</p>
           
           <div className="error"></div>
 

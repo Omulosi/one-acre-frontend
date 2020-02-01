@@ -20,12 +20,6 @@ const LandingPage = () => {
               <div className="column right auth-btn">
                 <Link to="/login" className="navbar-item desktop has-text-black desktop">LOGIN</Link>
                 <Link to="/signup" className="navbar-item desktop has-text-black desktop">SIGN UP</Link>
-                <figure className="navbar-item image">
-                  <Link to="/dashboard">
-                    <i className="fas fa-3x fa-bars has-text-white"
-                      style={{width: "1rem", height: "1rem"}}></i>
-                  </Link>
-                </figure>
               </div>
             </div>
           </nav>
