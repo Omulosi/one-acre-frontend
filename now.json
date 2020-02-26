@@ -1,7 +1,5 @@
 {
-  "build": {
-    "env": {
-      "REACT_APP_API_HOST": "@https://one-acre.herokuapp.com/api"
-    }
-  }
+"env": {
+"REACT_APP_API_HOST": "@https://one-acre.herokuapp.com/api"
+}
 }
