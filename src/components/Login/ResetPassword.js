@@ -11,6 +11,7 @@ import './style.scss';
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
+  const showNotification = useSelector(state => state.user.showNotification);
 
   useEffect(() => {
     dispatch({type: 'CLEAR_ERRORS'});
@@ -31,6 +32,7 @@ const ResetPassword = () => {
     }),
     onSubmit: (values, { setSubmitting }) => {
       dispatch(userPasswordReset(values, history, setSubmitting));
+      values.email = '';
     },
   });
 
@@ -40,6 +42,17 @@ const ResetPassword = () => {
       <div className="logo">
         <Link to="/" title="OneAcre">One Acre</Link>
       </div>
+      {showNotification
+          ? (<div className="notification basic-notification is-info is-size-6 reset-popup">
+              <button 
+                  className="delete"
+                  onClick={() => dispatch({type: 'SUCCESS'})}>
+              </button>
+            {`An email with instructions to reset your password has been sent to the email provided`}
+            </div>
+          )
+          : null
+      }
 
       <div className="auth-container">
         <form className="auth-form" onSubmit={formik.handleSubmit}>

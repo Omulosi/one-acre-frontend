@@ -6,7 +6,9 @@ import {
   CLEAR_ERRORS,
   STOP_LOADING,
   EDITTING_USER,
-  LOGOUT
+  LOGOUT,
+  SUCCESS,
+  RESET_PASSWORD
 } from '../types';
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
   credentials: {},
   errors: {},
   authenticated: false,
-  editting: false
+  editting: false,
+  showNotification: false
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -67,6 +70,20 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: {},
+      };
+
+    case SUCCESS:
+      return {
+        ...state,
+        showNotification: false,
+        loading: false
+      };
+
+    case RESET_PASSWORD:
+      return {
+        ...state,
+        showNotification: true,
+        loading: false
       };
 
     case LOGOUT:

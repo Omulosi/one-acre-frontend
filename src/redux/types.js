@@ -5,6 +5,7 @@ export const SUCCESS = 'SUCCESS';
 export const LOGIN = 'LOGIN';
 export const SIGNUP = 'SIGNUP';
 export const LOGOUT = 'LOGOUT';
+export const RESET_PASSWORD = 'RESET_PASSWORD'
 
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
 export const UPDATE_USER_DETAILS = 'UPDATE_USER_DETAILS';

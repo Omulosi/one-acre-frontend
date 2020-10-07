@@ -6,7 +6,8 @@ import {
   UPDATE_USER_DETAILS,
   EDITTING_USER,
   LOGOUT,
-  RESET_PASSWORD
+  RESET_PASSWORD,
+  SUCCESS
 }
 from '../types';
 import { axiosWithAuth } from '../../utils/axiosAuth';
@@ -47,8 +48,10 @@ export const userPasswordReset = (userData, history, setSubmitting) => dispatch 
       email: userData.email,
     })
     .then(({ data }) => {
-// history.push('/dashboard/profile');
       setSubmitting(false);
+      dispatch({
+        type: RESET_PASSWORD
+      })
     })
     .catch(err => {
       let error = err.response? err.response.data.error: err.message
