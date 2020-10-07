@@ -3,13 +3,13 @@ import { Link, useHistory } from 'react-router-dom'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { userLogin } from '../../redux/actions/userActionCreators';
+import { userPasswordReset } from '../../redux/actions/userActionCreators';
 
 
 import './style.scss';
 
 
-const Login = () => {
+const ResetPassword = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,19 +22,15 @@ const Login = () => {
 
     initialValues: {
         email: '',
-        password:'',
         errors: ''
       },
     validationSchema: Yup.object({
       email: Yup.string()
         .email('Invalid email address')
         .required('Please provide an email'),
-      password: Yup.string()
-        .required('Please provide a password')
-        .min(8, 'Password too short'),
     }),
     onSubmit: (values, { setSubmitting }) => {
-      dispatch(userLogin(values, history, setSubmitting));
+      dispatch(userPasswordReset(values, history, setSubmitting));
     },
   });
 
@@ -47,7 +43,8 @@ const Login = () => {
 
       <div className="auth-container">
         <form className="auth-form" onSubmit={formik.handleSubmit}>
-          <h1 className="auth-title">Login</h1>
+          <h1 className="auth-title">Forgot your password?</h1>
+            <p>Enter your email address and we will send you instructions on how to create a new password. </p>
 
           <p className="help is-danger center">{errors && errors.error}</p>
           
@@ -71,41 +68,17 @@ const Login = () => {
           ): null }
           </div>
 
-          <div className="field">
-            <div className="control">
-              <input 
-                type="password" 
-                name="password" 
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="input is-primary"
-                placeholder="Password"/>
-            </div>
-          { formik.touched.password && formik.errors.password? (
-            <p className="help is-danger">{formik.errors.password}</p>
-          ): null }
-          </div>
-
           <button 
             type="submit" 
             className={`button is-fullwidth is-success ${formik.isSubmitting? 'is-loading': ''}`}
             style={{ marginTop: '0.9rem' }}>
-            Login
+            Reset Password
           </button>
         </form>
 
-        <div className="auth-footer">
-          <div>
-            New to One Acre? <Link to="/signup">Sign Up</Link>
-          </div>
-          <div>
-             <Link to="/reset">Forgot Password?</Link>
-          </div>
-        </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default ResetPassword;

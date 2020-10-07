@@ -62,19 +62,9 @@ const Profile = ({ user }) => {
             <span className="subtitle address">{email}</span>
           </div>
         </div>
-
-        <div className="password">
-          <span>Password</span>
-          <br />
-          <span>●●●●●●●</span>
-          <span className="change-btn">
-            <button type="button">Change</button>
-          </span>
-        </div>
       </div>
 
       <div className="column is-4 card account-info">
-        <div>Account Verified {confirmed ? <FaCheck /> : <FaTimes />}</div>
         <div>Member from {timeSinceRegisteration}</div>
       </div>
     </div>

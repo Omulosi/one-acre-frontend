@@ -5,7 +5,8 @@ import {
   SET_ERRORS,
   UPDATE_USER_DETAILS,
   EDITTING_USER,
-  LOGOUT
+  LOGOUT,
+  RESET_PASSWORD
 }
 from '../types';
 import { axiosWithAuth } from '../../utils/axiosAuth';
@@ -38,6 +39,27 @@ export const userLogin = (userData, history, setSubmitting) => dispatch => {
       setSubmitting(false);
     });
 };
+
+export const userPasswordReset = (userData, history, setSubmitting) => dispatch => {
+  dispatch({ type: LOADING });
+  axios
+    .post(`${baseUrl}/auth/reset`, {
+      email: userData.email,
+    })
+    .then(({ data }) => {
+// history.push('/dashboard/profile');
+      setSubmitting(false);
+    })
+    .catch(err => {
+      let error = err.response? err.response.data.error: err.message
+      dispatch({
+        type: SET_ERRORS,
+        payload: { error },
+      });
+      setSubmitting(false);
+    });
+};
+
 
 export const userSignUp = (userData, history, setSubmitting) => dispatch => {
   dispatch({ type: LOADING });
